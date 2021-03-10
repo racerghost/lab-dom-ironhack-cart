@@ -28,10 +28,6 @@ function calculateAll() {
     updateSubtotal(allProducts[i]);
     total=total+updateSubtotal(allProducts[i]);
   }
-  console.log(total);
-
-  
-
   // ITERATION 3
   //... your code goes here
   document.querySelector('#total-value span').textContent=total;
@@ -52,31 +48,31 @@ function removeProduct(event) {
 
 function createProduct() {
   //... your code goes here
-  console.log('hola');
 
-  let trNew = document.createElement('td'); 
-  trNew.appendChild(document.createTextNode('Hello world!'));
-  let productsQuantity=document.getElementsByClassName('product');
-  console.log(productsQuantity.length);
-  console.log(typeof(productsQuantity));
-  var table = document.getElementById("cart");
-  var row = table.insertRow(productsQuantity.length+1);
-  row.classList.add('product');
-  var cell1 = row.insertCell(0);
-  cell1.classList.add('name');
-  var cell2 = row.insertCell(1);
-  cell2.classList.add('price');
-  var cell3 = row.insertCell(2);
-  cell3.classList.add('quantity');
-  var cell4 = row.insertCell(3);
-  cell4.classList.add('subtotal');
-  var cell5 = row.insertCell(4);
-  cell5.classList.add('action');
+let productName=document.getElementById('newProductName').value;
+let productPrice=document.getElementById('newProductPrice').value;
+let container=document.querySelector('tbody');
 
-  cell1.innerHTML = "NEW CELL1";
+container.innerHTML=container.innerHTML + `
+  <tr class="product">
+    <td class="name">
+      <span>${productName}</span>
+    </td>
+    <td class="price">$<span>${productPrice}</span></td>
+    <td class="quantity">
+      <input type="number" value="0" min="0" placeholder="Quantity" />
+    </td>
+    <td class="subtotal">$<span>0</span></td>
+    <td class="action">
+      <button class="btn btn-remove">Remove</button>
+    </td>
+  </tr>
+`;
+removeBtn=document.getElementsByClassName('btn-remove');
 
-  cell2.innerHTML = "NEW CELL2";
-
+for (let i=0;i<removeBtn.length;i++){
+  removeBtn[i].addEventListener('click',removeProduct);
+}
 
 
 }
